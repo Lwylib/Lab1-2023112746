@@ -1,31 +1,45 @@
 package lab1;
 
-import java.io.*;
-import java.util.*;
 import java.awt.Desktop;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.AbstractMap;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.PriorityQueue;
+import java.util.Queue;
+import java.util.Random;
+import java.util.Scanner;
+import java.util.Set;
 
 /**
- *
  * Lab1: 基于大模型的编程与Git实战
  * 功能：读入文本文件生成有向图，支持多种图操作
  * 作者：[姓名]
  * 日期：[日期]
  * 版本：1.0
  */
-public class Lab1 {
+public class Lab1Modefied {
     // 图结构：邻接表，Key为单词（小写），Value为邻接单词及其权重
     private Map<String, Map<String, Integer>> graph;
     // 所有节点集合
     private Set<String> nodes;
     private Random random = new Random();
 
-    public Lab1() {
+    public Lab1Modefied() {
         graph = new HashMap<>();
         nodes = new HashSet<>();
     }
 
     /**
      * 从文本文件构建有向图
+     *
      * @param filename 文件路径
      * @throws IOException 文件读取异常
      */
@@ -67,8 +81,8 @@ public class Lab1 {
      */
     public void showDirectedGraph() {
         String dotExe = "D:\\useful_software\\Graphviz\\bin\\dot.exe";
-        File dotFile = new File("graph.dot");
-        File pngFile = new File("graph.png");
+        java.io.File dotFile = new java.io.File("graph.dot");
+        java.io.File pngFile = new java.io.File("graph.png");
 
         // 生成DOT文件
         try (PrintWriter out = new PrintWriter(dotFile)) {
@@ -89,7 +103,7 @@ public class Lab1 {
         }
 
         // 检查dot.exe是否存在
-        if (!new File(dotExe).exists()) {
+        if (!new java.io.File(dotExe).exists()) {
             System.err.println("未找到Graphviz的dot.exe，使用文本方式展示。");
             fallbackTextDisplay();
             dotFile.delete();
@@ -143,6 +157,7 @@ public class Lab1 {
 
     /**
      * 功能需求3：查询桥接词
+     *
      * @param word1 第一个单词
      * @param word2 第二个单词
      * @return 描述字符串
@@ -193,6 +208,7 @@ public class Lab1 {
 
     /**
      * 辅助方法：从输入文本中提取原始单词（保留大小写）
+     *
      * @param text 输入文本
      * @return 原始单词列表
      */
@@ -217,6 +233,7 @@ public class Lab1 {
 
     /**
      * 功能需求4：根据桥接词生成新文本
+     *
      * @param inputText 用户输入的一行文本
      * @return 插入桥接词后的新文本
      */
@@ -253,6 +270,7 @@ public class Lab1 {
 
     /**
      * 功能需求5：计算两个单词之间的最短路径（边权和最小）
+     *
      * @param word1 起始单词
      * @param word2 目标单词
      * @return 描述路径和长度的字符串
@@ -296,7 +314,7 @@ public class Lab1 {
             return "No path from \"" + word1 + "\" to \"" + word2 + "\"!";
         }
         // 重建路径
-        LinkedList<String> path = new LinkedList<>();
+        java.util.LinkedList<String> path = new java.util.LinkedList<>();
         String step = word2;
         while (step != null) {
             path.addFirst(step);
@@ -312,6 +330,7 @@ public class Lab1 {
 
     /**
      * 新增辅助方法：计算单个单词到图中所有其他节点的最短路径
+     *
      * @param word 源单词
      * @return 多行描述字符串
      */
@@ -357,7 +376,7 @@ public class Lab1 {
             if (dist.get(target) < Double.MAX_VALUE) {
                 hasAny = true;
                 // 重建路径
-                LinkedList<String> path = new LinkedList<>();
+                java.util.LinkedList<String> path = new java.util.LinkedList<>();
                 String step = target;
                 while (step != null) {
                     path.addFirst(step);
@@ -377,6 +396,7 @@ public class Lab1 {
 
     /**
      * 功能需求6：计算单词的PageRank值（d=0.85）
+     *
      * @param word 目标单词
      * @return PageRank值，若单词不存在则返回null
      */
@@ -434,6 +454,7 @@ public class Lab1 {
     /**
      * 功能需求7：随机游走
      * 从随机节点开始，沿出边随机移动，直到遇到重复边或无出边，将路径保存到文件并返回
+     *
      * @return 路径字符串
      */
     public String randomWalk() {
@@ -471,6 +492,7 @@ public class Lab1 {
 
     /**
      * 主程序入口
+     *
      * @param args 可指定文件路径，若不指定则提示用户输入
      */
     public static void main(String[] args) {
