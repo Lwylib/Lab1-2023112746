@@ -48,6 +48,11 @@ public class Lab1 {
             }
         }
         // 构建边
+        if(wordList.size() == 1) {
+            String node0 = wordList.get(0);
+            nodes.add(node0);
+            graph.putIfAbsent(node0, new HashMap<>());
+        }
         for (int i = 0; i < wordList.size() - 1; i++) {
             String from = wordList.get(i);
             String to = wordList.get(i + 1);
