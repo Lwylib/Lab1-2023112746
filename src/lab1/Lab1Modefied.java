@@ -62,6 +62,10 @@ public class Lab1Modefied {
             }
         }
         // 构建边
+        if(wordList.size() == 1) {
+            String node0 = wordList.get(0);
+            nodes.add(node0);
+        }
         for (int i = 0; i < wordList.size() - 1; i++) {
             String from = wordList.get(i);
             String to = wordList.get(i + 1);

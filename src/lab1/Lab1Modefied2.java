@@ -62,6 +62,10 @@ public class Lab1Modefied2 {
             }
         }
         // 构建边
+        if(wordList.size() == 1) {
+            String node0 = wordList.get(0);
+            nodes.add(node0);
+        }
         for (int i = 0; i < wordList.size() - 1; i++) {
             String from = wordList.get(i);
             String to = wordList.get(i + 1);
@@ -106,7 +110,9 @@ public class Lab1Modefied2 {
         if (!new java.io.File(dotExe).exists()) {
             System.err.println("未找到Graphviz的dot.exe，使用文本方式展示。");
             fallbackTextDisplay();
-            dotFile.delete();
+            if (!dotFile.delete()) {
+                System.err.println("Failed to delete dot file: " + dotFile.getAbsolutePath());
+            }
             return;
         }
 
@@ -134,7 +140,9 @@ public class Lab1Modefied2 {
             fallbackTextDisplay();
         } finally {
             // 删除临时dot文件
-            dotFile.delete();
+            if (!dotFile.delete()) {
+                System.err.println("Failed to delete dot file: " + dotFile.getAbsolutePath());
+            }
         }
     }
 
