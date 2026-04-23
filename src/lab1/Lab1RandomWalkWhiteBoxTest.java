@@ -1,8 +1,7 @@
-package lab1.test;
+package lab1;
 
 
 
-import lab1.Lab1;
 import org.junit.Before;
 import org.junit.Test;
 import java.io.*;

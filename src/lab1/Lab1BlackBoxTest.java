@@ -3,6 +3,8 @@ package lab1;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.IOException;
+
 import static org.junit.Assert.assertEquals;
 
 public class Lab1BlackBoxTest {
@@ -49,5 +51,15 @@ public class Lab1BlackBoxTest {
     public void testBridgeWords_BothNotExist() {
         String result = lab.queryBridgeWords("hello", "city");
         assertEquals("No \"hello\" and \"city\" in the graph!", result);
+    }
+
+    // 测试用例 6: 多个
+    @Test
+    public void testBridgeWords_ExistMultiple() throws IOException {
+        lab = new Lab1();
+        // 确保 Easy Test.txt 文件在项目根目录或提供正确路径
+        lab.buildGraphFromFile("src/lab1/testMultiple.txt");
+        String result = lab.queryBridgeWords("a", "c");
+        assertEquals("The bridge words from \"a\" to \"c\" are: \"b\" and \"d\"", result);
     }
 }
